@@ -3,7 +3,7 @@ import org.junit.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 
-public class SampleTest {
+public class BaseTest {
 
     protected static WebDriver driver;
     protected static String browser = System.getProperty("browser").toUpperCase();
@@ -12,10 +12,13 @@ public class SampleTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
-              driver = WebDriverFactory.createNewDriver(DriverName.valueOf(browser));
+        //возможен запуск с опциями:
+        //driver = WebDriverFactory.createNewDriver(DriverName.valueOf(browser), options);
+        driver = WebDriverFactory.create(DriverNames.valueOf(browser));
     }
     @Test
     public void openPage() {
+        driver.manage().window().maximize();
         driver.get("https://otus.ru/");
     }
 
